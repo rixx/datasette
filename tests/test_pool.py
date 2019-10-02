@@ -3,7 +3,7 @@ import time
 
 import pytest
 
-from datasette.pool import Pool
+from datasette.database import Pool
 
 
 def test_lock_connection():
