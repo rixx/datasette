@@ -1,4 +1,17 @@
 <script>
+window.onload = () => {
+    const sqlFormat = document.querySelector("button#sql-format");
+    if (sqlFormat) {
+        sqlFormat.hidden = false;
+    }
+    const readOnly = document.querySelector("pre#sql-query");
+    if (readOnly) {
+        readOnly.innerHTML = sqlFormatter.format(readOnly.innerHTML);
+    }
+    const sqlInput = document.querySelector("textarea#sql-editor");
+    if (sqlInput) {
+        sqlInput.value = sqlFormatter.format(sqlInput.value);
+    }
     var editor = CodeMirror.fromTextArea(document.getElementById("sql-editor"), {
       lineNumbers: true,
       mode: "text/x-sql",
@@ -10,4 +23,10 @@
       },
       Tab: false
     });
+    if (sqlInput && sqlFormat) {
+        sqlFormat.addEventListener("click", ev => {
+            editor.setValue(sqlFormatter.format(editor.getValue()));
+        })
+    }
+}
 </script>
