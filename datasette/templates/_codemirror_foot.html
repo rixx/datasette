@@ -1,18 +1,18 @@
 <script>
 window.onload = () => {
     const sqlFormat = document.querySelector("button#sql-format");
-    if (sqlFormat) {
+    const readOnly = document.querySelector("pre#sql-query");
+    const sqlInput = document.querySelector("textarea#sql-editor");
+    if (sqlFormat && !readOnly) {
         sqlFormat.hidden = false;
     }
-    const readOnly = document.querySelector("pre#sql-query");
     if (readOnly) {
         readOnly.innerHTML = sqlFormatter.format(readOnly.innerHTML);
     }
-    const sqlInput = document.querySelector("textarea#sql-editor");
     if (sqlInput) {
         sqlInput.value = sqlFormatter.format(sqlInput.value);
     }
-    var editor = CodeMirror.fromTextArea(document.getElementById("sql-editor"), {
+    var editor = CodeMirror.fromTextArea(sqlInput, {
       lineNumbers: true,
       mode: "text/x-sql",
       lineWrapping: true,
